@@ -57,12 +57,15 @@ export default function Customer() {
       <div>
         <input type="text" placeholder="item name" id="itemName"></input>
         <button onClick={addItens}>adicionar</button>
-        <ul>
+
         {data.shop.itens.map((item)=>{
-            return <li>{item}</li>
+            return <>
+                    <span>{item}</span>
+                    <hr/>
+                  </>
           })
         }
-        </ul>
+
       </div>
     </div>
   )
