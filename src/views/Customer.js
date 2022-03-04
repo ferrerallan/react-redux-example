@@ -1,9 +1,16 @@
 
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import {useSelector} from 'react-redux';
+
 import './Customer.css';
 
 export default function Customer() {
+
+  const data = useSelector((state) =>  {
+    return state
+  });
+  console.log(data.shop.itens)
   const dispatch = useDispatch();
   const [customer, setCustomer] = useState({
     name: "Mauricio Viadi",
@@ -15,6 +22,20 @@ export default function Customer() {
     dispatch({type:'SET_CUSTOMER',customer});
     console.log(customer);
     event.preventDefault();
+    
+  }
+
+  const addItens =event=>{
+    console.log('adding item...')
+    let itens = [];
+
+    data.shop.itens.forEach(element => {
+      itens.push(element);
+    });
+    console.log(itens);
+    itens.push(document.getElementById("itemName").value);
+    dispatch({type:'SET_ITENS',itens});
+    
     
   }
 
@@ -31,6 +52,17 @@ export default function Customer() {
                  }
                }/>
         <button onClick={checkout}>gravar</button>
+      </div>
+      <h3>Itens</h3>
+      <div>
+        <input type="text" placeholder="item name" id="itemName"></input>
+        <button onClick={addItens}>adicionar</button>
+        <ul>
+        {data.shop.itens.map((item)=>{
+            return <li>{item}</li>
+          })
+        }
+        </ul>
       </div>
     </div>
   )

@@ -1,7 +1,12 @@
 import produce from 'immer';
 
 const INITIAL_STATE={
-  customer:{}
+  customer:{
+    name:"goku"
+  },
+  itens:[
+    "uva","banana", "maca"
+  ]
 }
 
 function shop(state = INITIAL_STATE, action){
@@ -9,6 +14,11 @@ function shop(state = INITIAL_STATE, action){
     case 'SET_CUSTOMER': {
       return produce(state, (draft)=>{
         draft.customer = action.customer;
+      })
+    }
+    case 'SET_ITENS': {
+      return produce(state, (draft)=>{
+        draft.itens = action.itens;
       })
     }
     default:
